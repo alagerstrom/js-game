@@ -9,13 +9,17 @@ class World {
             new Vehicle(600, 600, 100, 50, 0, Colors.RED, 400, Math.PI / 8),
             new Vehicle(500, 800, 300, 100, 0, Colors.BLUE, 50, Math.PI / 4),
         ]
-        this.gameObjects = [
-            new Background(4000, 2000),
-            this.player
-        ]
+        this.gameObjects = []
+        this.gameObjects.push(
+            new Background(4000, 2000)
+        )
         for (let v of this.vehicles) {
             this.gameObjects.push(v)
         }
+
+        // this.gameObjects.push(new Road(i * 100, j * 100))
+
+        this.gameObjects.push(this.player)
     }
 
     update(deltaTime) {
