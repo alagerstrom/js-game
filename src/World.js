@@ -1,6 +1,8 @@
 class World {
 
-    constructor(player) {
+    constructor(player, width, height) {
+        this.width = width;
+        this.height = height;
         this.player = player;
 
         this.vehicles = [
@@ -11,7 +13,7 @@ class World {
         ]
         this.gameObjects = []
         this.gameObjects.push(
-            new Background(4000, 2000)
+            new Background(this.width, this.height)
         )
         for (let v of this.vehicles) {
             this.gameObjects.push(v)
