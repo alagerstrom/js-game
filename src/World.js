@@ -2,22 +2,18 @@ class World {
 
     constructor(player) {
         this.player = player;
+
+        this.vehicles = [
+            new Vehicle(300, 500, 100, 50, 0, Colors.YELLOW),
+            new Vehicle(500, 500, 100, 50, 0, Colors.GREEN)
+        ]
         this.gameObjects = [
             new Background(4000, 2000),
-            new Circle(100, 100, 100, Colors.RED),
-            new Circle(400, 200, 100, Colors.BLUE),
-            new Circle(600, 600, 100, Colors.GREEN),
-            new Circle(800, 1000, 100, Colors.YELLOW),
-            new PhysicsBody(
-                new Circle(200, 200, 50, Colors.GREEN),
-                5, 5
-            ),
-            new PhysicsBody(
-                new Circle(10, 10, 10, Colors.RED),
-                1, 2
-            ),
             this.player
         ]
+        for (let v of this.vehicles) {
+            this.gameObjects.push(v)
+        }
     }
 
     update(deltaTime) {
@@ -31,4 +27,23 @@ class World {
             gameObject.draw(ctx);
         }
     }
+
+    getClosestVehicle() {
+        let maxDistance = 100;
+        let dist = null;
+        let closest = null;
+        for (let v of this.vehicles) {
+            let thisDist = distance(this.player.x, this.player.y, v.x, v.y);
+            if (dist === null || thisDist < dist) {
+                dist = thisDist;
+                closest = v;
+            }
+        }
+        if (dist > maxDistance) return null;
+        else return closest;
+    }
+}
+
+function distance(x1, y1, x2, y2) {
+    return Math.hypot(x2 - x1, y2 - y1);
 }

@@ -1,21 +1,21 @@
 class Vehicle extends GameObject {
 
-    constructor() {
+    constructor(x, y, width, height, angle, color) {
         super();
-        this.x = 300;
-        this.y = 300;
-        this.width = 100;
-        this.height = 50;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
         this.speed = 0;
         this.acceleration = 200;
         this.maxReverseSpeed = 100;
         this.braking = 800;
         this.steeringAngle = 0;
         this.maxSteeringAngle = Math.PI / 8;
-        this.angle = Math.PI / 2;
+        this.angle = angle;
         this.wheelbase = this.width;
         this.steeringChange = 5;
-        this.rect = new Rectangle(0, 0, this.width, this.height, Colors.YELLOW);
+        this.rect = new Rectangle(0, 0, this.width, this.height, color);
     }
 
     turnLeft(deltaTime) {
