@@ -9,14 +9,12 @@ class Player extends GameObject {
         this.speed = 0;
         this.acceleration = 200;
         this.maxReverseSpeed = 100;
-        this.turnSpeed = 1;
         this.braking = 800;
         this.steeringAngle = 0;
         this.maxSteeringAngle = Math.PI / 8;
         this.angle = Math.PI / 2;
         this.keyboard = keyboard;
         this.wheelbase = this.width;
-        this.forward = true;
         this.rect = new Rectangle(0, 0, this.width, this.height, Colors.YELLOW);
     }
 
@@ -34,11 +32,6 @@ class Player extends GameObject {
         } else if (this.keyboard.isKeyDown(Buttons.RIGHT)) {
             this.steeringAngle += steeringChange * deltaTime;
         } else {
-            // if (this.steeringAngle > 0) {
-            //     this.steeringAngle -= steeringChange * deltaTime;
-            // } else if (this.steeringAngle < 0) {
-            //     this.steeringAngle += steeringChange * deltaTime;
-            // }
             this.steeringAngle = 0;
         }
         if (this.steeringAngle < -this.maxSteeringAngle) this.steeringAngle = -this.maxSteeringAngle;
