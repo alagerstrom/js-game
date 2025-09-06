@@ -6,6 +6,7 @@ class World {
         this.vehicles = [
             new Vehicle(300, 500, 100, 50, 0, Colors.YELLOW, 200, Math.PI / 8),
             new Vehicle(500, 500, 100, 50, 0, Colors.GREEN, 200, Math.PI / 8),
+            new Vehicle(600, 600, 100, 50, 0, Colors.RED, 400, Math.PI / 8),
             new Vehicle(500, 800, 300, 100, 0, Colors.BLUE, 50, Math.PI / 4),
         ]
         this.gameObjects = [
