@@ -3,7 +3,7 @@ class Player extends GameObject {
     constructor(keyboard) {
         super();
         this.x = 300;
-        this.y = 300;
+        this.y = 400;
         this.width = 10;
         this.height = 10;
         this.speed = 0;
@@ -25,21 +25,7 @@ class Player extends GameObject {
     }
 
     updateInVehicle(deltaTime) {
-        if (this.keyboard.isKeyDown(Buttons.LEFT)) {
-            this.vehicle.turnLeft(deltaTime);
-        } else if (this.keyboard.isKeyDown(Buttons.RIGHT)) {
-            this.vehicle.turnRight(deltaTime);
-        } else {
-            this.vehicle.goStraight(deltaTime)
-        }
-
-        if (this.keyboard.isKeyDown(Buttons.UP)) {
-            this.vehicle.accelerate(deltaTime)
-        }
-        if (this.keyboard.isKeyDown(Buttons.DOWN)) {
-            this.vehicle.decelerate(deltaTime)
-        }
-        this.vehicle.update(deltaTime);
+        this.vehicle.update(deltaTime, this.keyboard);
         this.x = this.vehicle.x;
         this.y = this.vehicle.y;
         this.dx = this.vehicle.dx;

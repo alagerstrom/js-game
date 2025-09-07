@@ -47,7 +47,24 @@ class Vehicle extends GameObject {
         if (this.speed < -this.maxReverseSpeed) this.speed = -this.maxReverseSpeed;
     }
 
-    update(deltaTime) {
+    update(deltaTime, keyboard) {
+        if (keyboard !== null && keyboard !== undefined) {
+            if (keyboard.isKeyDown(Buttons.LEFT)) {
+                this.turnLeft(deltaTime);
+            } else if (keyboard.isKeyDown(Buttons.RIGHT)) {
+                this.turnRight(deltaTime);
+            }
+            else {
+                this.goStraight(deltaTime)
+            }
+            if (keyboard.isKeyDown(Buttons.UP)) {
+                this.accelerate(deltaTime)
+            }
+            if (keyboard.isKeyDown(Buttons.DOWN)) {
+                this.decelerate(deltaTime)
+            }
+
+        }
         const friction = 0.8; // keep 90% of speed per second
         this.speed *= Math.pow(friction, deltaTime);
 
