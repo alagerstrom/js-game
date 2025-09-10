@@ -28,11 +28,13 @@ class Game {
     enterClosestVehicle() {
         if (this.player.vehicle === null) {
             this.player.vehicle = this.world.getClosestVehicle();
+            this.player.vehicle.playerEntered = true;
         }
         else {
             let stepOut = 50;
             this.player.x = this.player.x + Math.sin(this.player.vehicle.angle) * stepOut;
             this.player.y = this.player.y - Math.cos(this.player.vehicle.angle) * stepOut;
+            this.player.vehicle.playerEntered = false;
             this.player.vehicle = null;
         }
     }

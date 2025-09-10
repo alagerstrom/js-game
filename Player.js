@@ -64,7 +64,7 @@ class Player extends GameObject {
 
     draw(ctx) {
         if (this.vehicle !== null) {
-            this.vehicle.draw(ctx)
+
         } else {
             ctx.save();
             ctx.translate(this.x, this.y);

@@ -16,6 +16,9 @@ class Vehicle extends GameObject {
         this.wheelbase = this.width;
         this.steeringChange = 5;
         this.rect = new Rectangle(0, 0, this.width, this.height, color);
+        this.playerEntered = false;
+        this.img = new Image();
+        this.img.src = 'img/car-person.png';
     }
 
     turnLeft(deltaTime) {
@@ -85,7 +88,11 @@ class Vehicle extends GameObject {
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle);
-        this.rect.draw(ctx);
+        if (this.playerEntered) {
+            ctx.drawImage(this.img, -this.width/2, -this.height/2, this.width, this.height);
+        } else {
+            this.rect.draw(ctx);
+        }
         ctx.restore();
     }
 }
