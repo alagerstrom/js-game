@@ -3,7 +3,7 @@ class Game {
 
     constructor() {
         this.keyboard = new Keyboard()
-        this.player = new Player(this.keyboard)
+        this.player = new Player(this.keyboard, false)
         this.world = new World(this.player, 4000, 2000);
         this.camera = new Camera(this.keyboard, 0, 0, this.player)
         window.addEventListener("keydown", e => this.keyDown(e.key));

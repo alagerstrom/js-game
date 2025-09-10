@@ -1,6 +1,6 @@
 class Player extends GameObject {
 
-    constructor(keyboard) {
+    constructor(keyboard, easySteer) {
         super();
         this.x = 300;
         this.y = 400;
@@ -13,6 +13,7 @@ class Player extends GameObject {
         this.keyboard = keyboard;
         this.vehicle = null;
         this.maxSpeed = 40;
+        this.easySteering = easySteer;
         this.rect = new Rectangle(0, 0, this.width, this.height, Colors.RED);
     }
 
@@ -25,6 +26,7 @@ class Player extends GameObject {
     }
 
     updateInVehicle(deltaTime) {
+        this.vehicle.easySteering = this.easySteering;
         this.vehicle.update(deltaTime, this.keyboard);
         this.x = this.vehicle.x;
         this.y = this.vehicle.y;
@@ -35,6 +37,48 @@ class Player extends GameObject {
     }
 
     updateWithoutVehicle(deltaTime) {
+        if (this.easySteering) {
+            this.easySteer(deltaTime)
+        } else {
+            this.gtaSteering(deltaTime)
+        }
+    }
+
+    easySteer(deltaTime) {
+        let keyboard = this.keyboard
+        if (keyboard !== null && keyboard !== undefined) {
+            if (keyboard.isKeyDown(Buttons.LEFT) && keyboard.isKeyDown(Buttons.DOWN)) {
+                this.angle = Math.PI - Math.PI / 4
+            } else if (keyboard.isKeyDown(Buttons.LEFT) && keyboard.isKeyDown(Buttons.UP)) {
+                this.angle = Math.PI + Math.PI / 4
+            } else if (keyboard.isKeyDown(Buttons.RIGHT) && keyboard.isKeyDown(Buttons.DOWN)) {
+                this.angle = Math.PI / 4
+            } else if (keyboard.isKeyDown(Buttons.RIGHT) && keyboard.isKeyDown(Buttons.UP)) {
+                this.angle = 3 * Math.PI / 2 + Math.PI / 4
+            } else if (keyboard.isKeyDown(Buttons.LEFT)) {
+                this.angle = Math.PI
+                this.speed = this.maxSpeed;
+            } else if (keyboard.isKeyDown(Buttons.RIGHT)) {
+                this.angle = 0;
+                this.speed = this.maxSpeed;
+            } else if (keyboard.isKeyDown(Buttons.UP)) {
+                this.angle = 3 * Math.PI / 2
+                this.speed = this.maxSpeed;
+            } else if (keyboard.isKeyDown(Buttons.DOWN)) {
+                this.angle = Math.PI / 2
+                this.speed = this.maxSpeed;
+            } else {
+                this.speed = 0;
+            }
+        }
+
+        this.dx = Math.cos(this.angle) * this.speed;
+        this.dy = Math.sin(this.angle) * this.speed;
+        this.x += this.dx * deltaTime;
+        this.y += this.dy * deltaTime;
+    }
+
+    gtaSteering(deltaTime) {
         if (this.keyboard.isKeyDown(Buttons.LEFT)) {
             this.steeringAngle = -this.maxSteeringAngle;
         } else if (this.keyboard.isKeyDown(Buttons.RIGHT)) {
