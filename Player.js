@@ -4,17 +4,19 @@ class Player extends GameObject {
         super();
         this.x = 300;
         this.y = 400;
-        this.width = 10;
-        this.height = 10;
+        this.width = 50;
+        this.height = 50;
         this.speed = 0;
         this.steeringAngle = 0;
         this.maxSteeringAngle = 1.2;
         this.angle = Math.PI / 2;
         this.keyboard = keyboard;
         this.vehicle = null;
-        this.maxSpeed = 40;
+        this.maxSpeed = 100;
         this.easySteering = easySteer;
         this.rect = new Rectangle(0, 0, this.width, this.height, Colors.RED);
+        this.img = new Image();
+        this.img.src = 'img/person.png';
     }
 
     update(deltaTime) {
@@ -113,7 +115,8 @@ class Player extends GameObject {
             ctx.save();
             ctx.translate(this.x, this.y);
             ctx.rotate(this.angle);
-            this.rect.draw(ctx);
+            // this.rect.draw(ctx);
+            ctx.drawImage(this.img, -this.width/2, -this.height/2, this.width, this.height);
             ctx.restore();
         }
     }
