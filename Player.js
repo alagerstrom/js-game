@@ -4,8 +4,8 @@ class Player extends GameObject {
         super();
         this.x = 300;
         this.y = 400;
-        this.width = 50;
-        this.height = 50;
+        this.width = 80;
+        this.height = 80;
         this.speed = 0;
         this.steeringAngle = 0;
         this.maxSteeringAngle = 1.2;
